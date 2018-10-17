@@ -1,0 +1,26 @@
+index:
+    path: /
+    controller: App\Controller\DefaultController::index
+panels:
+    path: /panels
+    controller: App\Controller\DefaultController::panels
+
+dropdown:
+    path: /dropdown
+    controller: App\Controller\DefaultController::dropdown
+
+recipe:
+    path: /recipe
+    controller: App\Controller\DefaultController::recipe
+
+recipe_components:
+    path: /recipe-components
+    controller: App\Controller\DefaultController::recipeComponents
+
+recipe_components_webpack:
+    path: /recipe-components-webpack
+    controller: App\Controller\DefaultController::recipeComponentsWebpack
+
+widgets:
+    path: /widgets
+    controller: App\Controller\DefaultController::widgets

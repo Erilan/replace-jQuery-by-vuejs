@@ -1,0 +1,89 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+  <h3>Dropdown - Vuejs</h3>
+  {% verbatim %}
+    <div id="Vue">
+      <div class="Dropdown-Title" @click="toggleDropdown">Dropdown me !</div>
+      <div v-if="display" class="Dropdown-ItemList">
+        <a class="Dropdown-Item">First link</a>
+        <a class="Dropdown-Item">Second link</a>
+        <a class="Dropdown-Item">Third link</a>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#Vue',
+        data() {
+          return {
+            display: false
+          }
+        },
+        methods: {
+          toggleDropdown() {
+            this.display = !this.display
+          }
+        }
+      })
+    </script>
+  {% endverbatim %}
+
+  <h3>Dropdown - jQuery</h3>
+  <div>
+    <div class="Dropdown-Title js-dropdown">Dropdown me !</div>
+    <div class="Dropdown-ItemList Dropdown-ItemList--closed">
+      <a class="Dropdown-Item">First link</a>
+      <a class="Dropdown-Item">Second link</a>
+      <a class="Dropdown-Item">Third link</a>
+    </div>
+  </div>
+
+  <script>
+    $('.js-dropdown').on('click', function(element) {
+      var next = $(this).next()
+      if (next.hasClass('Dropdown-ItemList--closed')) {
+        next.removeClass('Dropdown-ItemList--closed')
+      } else {
+        next.addClass('Dropdown-ItemList--closed')
+      }
+    })
+  </script>
+{% endblock %}
+
+
+{% block stylesheets %}
+  <style>
+    .Dropdown-Title {
+      font-weight: 600;
+      background-color: tomato;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 2px;
+      width: 200px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    .Dropdown-ItemList {
+      display: flex;
+      flex-direction: column;
+      width: 200px;
+    }
+
+    .Dropdown-Item {
+      width: 100%;
+      background-color: darkcyan;
+      padding: 5px 10px;
+      margin-top: 1px;
+      border-radius: 3px;
+    }
+
+    .Dropdown-ItemList--closed {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+
+

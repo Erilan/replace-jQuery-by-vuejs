@@ -1,0 +1,95 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+  <h3>Panels - Vuejs</h3>
+  {% verbatim %}
+    <div id="Vue">
+      <div class="Panel-TitleList">
+        <button class="Panel-Title" @click="activatePanel(1)">First Panel</button>
+        <button class="Panel-Title" @click="activatePanel(2)">Second Panel</button>
+        <button class="Panel-Title" @click="activatePanel(3)">Third Panel</button>
+      </div>
+      <div class="Panel-ContentList">
+        <div v-if="activePanel === 1" class="Panel-Content">Content of the first panel</div>
+        <div v-if="activePanel === 2" class="Panel-Content">I am the second panel's content</div>
+        <div v-if="activePanel === 3" class="Panel-Content">The third panel is the best</div>
+      </div>
+    </div>
+
+    <script>
+      new Vue({
+        el: '#Vue',
+        data() {
+          return {
+            activePanel: 1
+          }
+        },
+        methods: {
+          activatePanel(panelIndex) {
+            this.activePanel = panelIndex
+          }
+        }
+      })
+    </script>
+  {% endverbatim %}
+
+
+  <h3>Panels - jQuery</h3>
+  <div>
+    <div class="Panel-TitleList">
+      <button class="Panel-Title js-panel" data-targetPanel="#panel1">First Panel</button>
+      <button class="Panel-Title js-panel" data-targetPanel="#panel2">Second Panel</button>
+      <button class="Panel-Title js-panel" data-targetPanel="#panel3">Third Panel</button>
+    </div>
+    <div class="Panel-ContentList">
+      <div id="panel1" class="Panel-Content js-contentPanel">Content of the first panel</div>
+      <div id="panel2" class="Panel-Content js-contentPanel Panel-Content--hidden">I am the second panel's content</div>
+      <div id="panel3" class="Panel-Content js-contentPanel Panel-Content--hidden">The third panel is the best</div>
+    </div>
+  </div>
+
+  <script>
+    $('.js-panel').on('click', function(element) {
+      var targetId = element.currentTarget.dataset.targetpanel
+      $('.js-contentPanel').addClass('Panel-Content--hidden')
+      $(targetId).removeClass('Panel-Content--hidden')
+    })
+  </script>
+{% endblock %}
+
+
+{% block stylesheets %}
+  <style>
+    .Panel-Title {
+      font-weight: 600;
+      background-color: red;
+      text-transform: uppercase;
+      padding: 10px 20px;
+      border-radius: 2px;
+      text-align: center;
+      cursor: pointer;
+      border: 0;
+      transition: all .5s;
+    }
+
+    .Panel-Title:hover {
+      background-color: blue;
+    }
+
+    .Panel-ContentList {
+      margin-top: 5px;
+    }
+
+    .Panel-Content {
+      padding: 15px;
+      border: 1px solid darkcyan;
+      width: 377px;
+    }
+
+    .Panel-Content--hidden {
+      display: none;
+    }
+  </style>
+{% endblock %}
+
+

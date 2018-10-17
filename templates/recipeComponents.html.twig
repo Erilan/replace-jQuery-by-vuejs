@@ -1,0 +1,74 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+  <h2>Recette de la quiche lorraine : </h2>
+  <h3>Recipe - Vuejs</h3>
+  {% verbatim %}
+    <div id="Vue">
+      <label for="serving">Portions :</label>
+      <input type="number" v-model="serving">
+      <button @click="decreaseServing">-</button>
+      <button @click="increaseServing">+</button>
+
+      <div class="Recipe-IngredientList">
+        <serving-ingredient name="Farine" :serving="serving" base-value="100" metric="g"></serving-ingredient>
+        <serving-ingredient name="Oeuf" :serving="serving" base-value="2" metric=""></serving-ingredient>
+        <serving-ingredient name="Lait" :serving="serving" base-value="150" metric="mL"></serving-ingredient>
+        <serving-ingredient name="Lardon" :serving="serving" base-value="50" metric="g"></serving-ingredient>
+      </div>
+    </div>
+
+    <script>
+      Vue.component('serving-ingredient', {
+        template: '<div class="Recipe-Ingredient">{{ name }} : <span>{{ serving * baseValue }}</span>{{ metric }}</div>',
+        props: ['name', 'serving', 'baseValue', 'metric']
+      })
+
+      new Vue({
+        el: '#Vue',
+        data() {
+          return {
+            serving: 1
+          }
+        },
+        methods: {
+          decreaseServing() {
+            this.serving = this.serving - 1
+          },
+          increaseServing() {
+            this.serving = this.serving + 1
+          }
+        }
+      })
+    </script>
+  {% endverbatim %}
+
+{% endblock %}
+
+
+{% block stylesheets %}
+  <style>
+    .Recipe-IngredientList {
+      width: 250px;
+      border: 1px solid #777;
+      border-radius: 3px;
+      padding: 5px;
+      margin-top: 5px;
+    }
+
+    .Recipe-Ingredient {
+      border-bottom: 1px solid black;
+      padding: 5px 0;
+    }
+
+    .Recipe-Ingredient:last-child {
+      border-bottom: none;
+    }
+
+    .Recipe-Ingredient span {
+      font-weight: 600;
+    }
+  </style>
+{% endblock %}
+
+
